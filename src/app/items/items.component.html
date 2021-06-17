@@ -1,0 +1,48 @@
+<div class="container d-flex flex-column justify-content-center h-100">
+    <div class="row">
+        <div class="col mb-3 text-center">
+            <h1>Lista de items</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-2 d-flex flex-row align-items-start">
+            <a (click)="create()" class="btn btn-success">Adicionar item</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col" class="text-end">Quantidade</th>
+                    <th scope="col" class="text-end">Preço</th>
+                    <th scope="col" class="text-end">Perecível</th>
+                    <th scope="col" class="text-end">Data de fabricação</th>
+                    <th scope="col" class="text-end">Data de validade</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.name}}</td>
+                    <td class="text-end">{{item.quantity}}</td>
+                    <td class="text-end">{{item.price| currency:'BRL'}}</td>
+                    <td class="text-end">
+                        <i *ngIf="item.perishable; else elseBlock" class="bi bi-check-circle-fill text-success"></i>
+                        <ng-template #elseBlock><i class="bi bi-x-circle-fill text-danger"></i></ng-template>
+                    </td>
+                    <td class="text-end">{{ item.manufacturingDate | date:'dd/MM/yyyy' }}</td>
+                    <td class="text-end">{{ item.expirationDate | date:'dd/MM/yyyy' }}</td>                    
+                    <td>
+                        <button class="btn" (click)="edit(item.id)"><i class="bi bi-pencil-square text-primary"></i></button>
+                        <button class="btn" (click)="delete(item.id)"><i class="bi bi-trash-fill text-danger"></i></button>
+
+                    </td>
+                </tr>
+                
+            </tbody>
+            </table>
+    </div>  
+</div>
